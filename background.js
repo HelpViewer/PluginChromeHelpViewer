@@ -88,7 +88,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
   
     const targetUrl = baseUrl +
       "?d=" + encodeURIComponent(filePath) +
-      "&p=" + encodeURIComponent(String(elementId || 'noid')) + ".md";
+      "&p=" + encodeURIComponent(String(elementId || 'noid')) + (helpFile.extension || ".md");
   
     chrome.tabs.create({ url: targetUrl });
 
