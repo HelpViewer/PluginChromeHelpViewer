@@ -61,7 +61,6 @@ chrome.tabs.onActivated.addListener((activeInfo) => {
 });
 
 chrome.contextMenus.onClicked.addListener((info, tab) => {
-  console.log("helpFile AAA ", info, tab);
   if (info.menuItemId !== HVI_MENU_ID) return;
   if (!tab || !tab.id) return;
 
@@ -71,11 +70,17 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 
   chrome.tabs.sendMessage(tab.id, { type: "getElementInfo" }, (elemInfo) => {
     if (chrome.runtime.lastError || !elemInfo) {
-      console.warn("Nemám element info:", chrome.runtime.lastError?.message);
+      console.warn("Not any element info found:", chrome.runtime.lastError?.message);
       return;
     }
 
-    const elementId = elemInfo.id?.replace(/\|/g, '-') || 'noid';
+    let elementId = elemInfo.id?.replace(/\|/g, '-') || 'noid';
+    let urlSplits = '';
+    if (helpFile.routing) {
+      urlSplits = (tab.url ? tab.url.split('?')[0]?.split('/') : []).filter(x => x).slice(1);
+      elementId = urlSplits.join('-')?.replace(/\:|\./g, '-') + '-' + elementId;
+    }
+
     const baseUrl = helpFile.viewer || 'https://helpviewer.github.io/index.html';
     const filePath = helpFile.file || '';
   
