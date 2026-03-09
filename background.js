@@ -74,11 +74,13 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
       return;
     }
 
-    let elementId = elemInfo.id?.replace(/\|/g, '-') || 'noid';
+    let elementId = elemInfo.id?.replace(/\|/g, '-') || '';
     let urlSplits = '';
     if (helpFile.routing) {
       urlSplits = (tab.url ? tab.url.split('?')[0]?.split('/') : []).filter(x => x).slice(1);
-      elementId = urlSplits.join('-')?.replace(/\:|\./g, '-') + '-' + elementId;
+      if (elementId)
+        elementId = `-${elementId}`;
+      elementId = urlSplits.join('-')?.replace(/\:|\./g, '-') + elementId;
     }
 
     const baseUrl = helpFile.viewer || 'https://helpviewer.github.io/index.html';
@@ -86,7 +88,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
   
     const targetUrl = baseUrl +
       "?d=" + encodeURIComponent(filePath) +
-      "&p=" + encodeURIComponent(String(elementId)) + ".md";
+      "&p=" + encodeURIComponent(String(elementId || 'noid')) + ".md";
   
     chrome.tabs.create({ url: targetUrl });
 
