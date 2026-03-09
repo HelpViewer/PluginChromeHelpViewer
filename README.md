@@ -42,9 +42,9 @@ var hvHelpFile = {
 | Key | Meaning |
 | --- | --- |
 | file | Help file or repository raw reading path |
-| viewer | URI with your copy of **HelpViewer**. If not any specified, then https://helpviewer.github.io/index.html used as its default |
+| viewer | URI with your copy of **HelpViewer**. **Default: https://helpviewer.github.io/index.html** |
 | routing | If routing is true, then URI route is part of requested help file chapter file name |
-| extension | Chapter file name extension. If not any specified, then **.md** used as its default |
+| extension | Chapter file name extension. **Default: .md** |
 
 ### Example
 
