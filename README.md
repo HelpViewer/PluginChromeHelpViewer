@@ -34,6 +34,7 @@ var hvHelpFile = {
   viewer: 'https://helpviewer.github.io/index.html',
   routing: false
   //, extension: '.md'
+  //, offset: 0
 }
 ```
 
@@ -45,6 +46,7 @@ var hvHelpFile = {
 | viewer | URI with your copy of **HelpViewer**. **Default: https://helpviewer.github.io/index.html** |
 | routing | If routing is true, then URI route is part of requested help file chapter file name |
 | extension | Chapter file name extension. **Default: .md** |
+| offset | Left-side routing parts offset. **Default: 0** |
 
 ### Example
 

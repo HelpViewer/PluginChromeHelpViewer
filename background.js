@@ -77,7 +77,7 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
     let elementId = elemInfo.id?.replace(/\|/g, '-') || '';
     let urlSplits = '';
     if (helpFile.routing) {
-      urlSplits = (tab.url ? tab.url.split('?')[0]?.split('/') : []).filter(x => x).slice(1);
+      urlSplits = (tab.url ? tab.url.split('?')[0]?.split('/') : []).filter(x => x).slice(1 + (helpFile.offset || 0));
       if (elementId)
         elementId = `-${elementId}`;
       elementId = urlSplits.join('-')?.replace(/\:|\./g, '-') + elementId;
