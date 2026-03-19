@@ -17,7 +17,7 @@ To enable HelpViewer integration, follow these steps:
 
 ## Browser Extension installation
 
-1. Call **git clone https://github.com/HelpViewer/PluginChromeHelpViewer** in some folder on your local disk.
+1. Call **git clone <https://github.com/HelpViewer/PluginChromeHelpViewer>** in some folder on your local disk.
 2. Open extensions panel - **chrome://extensions/**
 3. Turn on **Developer mode** on right top corner
 4. Click button **Load unpacked** on left top line
@@ -32,6 +32,7 @@ Define globally in your application:
 var hvHelpFile = {
   file: 'hlp-user/Help-__.zip',
   viewer: 'https://helpviewer.github.io/index.html',
+  //viewer: '$/index.html',
   routing: false
   //, extension: '.md'
   //, offset: 0
@@ -43,16 +44,16 @@ var hvHelpFile = {
 | Key | Meaning |
 | --- | --- |
 | file | Help file or repository raw reading path |
-| viewer | URI with your copy of **HelpViewer**. **Default: https://helpviewer.github.io/index.html** |
+| viewer | URI with your copy of **HelpViewer**. **Default: <https://helpviewer.github.io/index.html>**. Use with **$/index.html** for use relative path of your source application as viewer path root. |
 | routing | If routing is true, then URI route is part of requested help file chapter file name |
 | extension | Chapter file name extension. **Default: .md** |
 | offset | Left-side routing parts offset. **Default: 0** |
 
 ### Example
 
-When running the application from URI **file:///C:/Repos/HelpViewer/index.html** for element ID **downP-TopicTree**, the routing generates these URLs:
+When running the application from URI **file://C:/Repos/HelpViewer/index.html** for element ID **downP-TopicTree**, the routing generates these URLs:
 
 | routing | Result URI |
 | --- | --- |
-| false | https://helpviewer.github.io/index.html?d=hlp-user%2FHelp-__.zip&p=downP-TopicTree.md |
-| true | https://helpviewer.github.io/index.html?d=hlp-user%2FHelp-__.zip&p=C--Repos-HelpViewer-index-html-downP-TopicTree.md |
+| false | <https://helpviewer.github.io/index.html?d=hlp-user%2FHelp-__.zip&p=downP-TopicTree.md> |
+| true | <https://helpviewer.github.io/index.html?d=hlp-user%2FHelp-__.zip&p=C--Repos-HelpViewer-index-html-downP-TopicTree.md> |

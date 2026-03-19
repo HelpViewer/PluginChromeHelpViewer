@@ -76,14 +76,17 @@ chrome.contextMenus.onClicked.addListener((info, tab) => {
 
     let elementId = elemInfo.id?.replace(/\|/g, '-') || '';
     let urlSplits = '';
+    let urlArray = tab.url.split('?')[0]?.split('/');
     if (helpFile.routing) {
-      urlSplits = (tab.url ? tab.url.split('?')[0]?.split('/') : []).filter(x => x).slice(1 + (helpFile.offset || 0));
+      urlSplits = (tab.url ? urlArray : []).filter(x => x).slice(1 + (helpFile.offset || 0));
       if (elementId)
         elementId = `-${elementId}`;
       elementId = urlSplits.join('-')?.replace(/\:|\./g, '-') + elementId;
     }
 
-    const baseUrl = helpFile.viewer || 'https://helpviewer.github.io/index.html';
+    urlArray?.pop();
+    const relativeBase = urlArray?.join('/') || '/';
+    const baseUrl = helpFile?.viewer?.replace('$', relativeBase) || 'https://helpviewer.github.io/index.html';
     const filePath = helpFile.file || '';
   
     const targetUrl = baseUrl +
